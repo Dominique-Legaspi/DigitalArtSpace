@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,12 +20,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -57,10 +56,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DigitalArtSpace(paintings: List<Painting>, modifier: Modifier = Modifier){
-    var imageSource by remember { mutableStateOf(1)}
+    var imageSource by remember { mutableIntStateOf(1) }
     Column (modifier = Modifier.fillMaxWidth()){
         Box(modifier = modifier.fillMaxWidth()
             .padding(top = 30.dp, start = 10.dp, end = 10.dp)
+            .border(1.5.dp, Color.DarkGray, RoundedCornerShape(20.dp))
+            .shadow(elevation = 5.dp, shape = RoundedCornerShape((20.dp)))
             ) {
             Image(
                 painter = painterResource(paintings[imageSource].imageResourceid),
@@ -73,7 +74,7 @@ fun DigitalArtSpace(paintings: List<Painting>, modifier: Modifier = Modifier){
             )
         }
         Spacer(modifier.height(30.dp))
-        AuthorInfo(artpiece = stringResource(paintings[imageSource].title),
+        AuthorInfo(artPiece = stringResource(paintings[imageSource].title),
             author = stringResource(paintings[imageSource].description),
             year = stringResource(paintings[imageSource].year))
         Spacer(modifier.height(30.dp))
@@ -102,16 +103,16 @@ fun DigitalArtSpace(paintings: List<Painting>, modifier: Modifier = Modifier){
 
 
 @Composable
-fun AuthorInfo(artpiece: String, author: String, year: String, modifier: Modifier=Modifier){
-    val temp_string = author + " (" + year + ")"
+fun AuthorInfo(artPiece: String, author: String, year: String, modifier: Modifier=Modifier){
+    val tempString = "$author ($year)"
     Box(modifier = Modifier){
         Column(modifier = modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally){
-            Text(text = artpiece,
+            Text(text = artPiece,
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Bold)
-            Text(text = temp_string,
+            Text(text = tempString,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold)
         }

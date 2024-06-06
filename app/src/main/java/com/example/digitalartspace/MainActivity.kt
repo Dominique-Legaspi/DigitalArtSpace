@@ -105,12 +105,13 @@ fun DigitalArtSpace(paintings: List<Painting>, modifier: Modifier = Modifier){
 @Composable
 fun AuthorInfo(artPiece: String, author: String, year: String, modifier: Modifier=Modifier){
     val tempString = "$author ($year)"
-    Box(modifier = Modifier){
+    Box(modifier = Modifier,
+        contentAlignment = Alignment.Center){
         Column(modifier = modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally){
             Text(text = artPiece,
-                fontSize = 32.sp,
+                fontSize = 30.sp,
                 fontWeight = FontWeight.Bold)
             Text(text = tempString,
                 fontSize = 24.sp,

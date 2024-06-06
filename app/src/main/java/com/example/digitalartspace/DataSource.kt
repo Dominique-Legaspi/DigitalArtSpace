@@ -14,8 +14,6 @@ class DataSource {
             Painting(R.string.image6, R.string.image6author, R.string.year, R.drawable.image6),
             Painting(R.string.image7, R.string.image7author, R.string.year, R.drawable.image7),
             Painting(R.string.image8, R.string.image8author, R.string.year, R.drawable.image8),
-            Painting(R.string.image9, R.string.image9author, R.string.year, R.drawable.image9),
-            Painting(R.string.image10, R.string.image10author, R.string.year, R.drawable.image10),
         )
     }
 }
